@@ -25,12 +25,13 @@ public class character : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            animator.SetBool("jump",true);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            animator.SetBool("jump",false);
+            animator.SetBool("jump",true);
         }
 
         Flip();
@@ -39,11 +40,11 @@ public class character : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        animator.SetBool("jump",false);
     }
 
     private bool IsGrounded()
     {
-        animator.SetBool("jump",false);
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
