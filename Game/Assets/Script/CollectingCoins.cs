@@ -19,9 +19,12 @@ public class CollectingCoins : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
-        Destroy(gameObject,0.5f);
-        Debug.Log("Coins!!");
+        if (other.CompareTag("Player"))
+        {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
+            Destroy(gameObject, 0.5f);
+            Debug.Log("Coins!!");
+        }
     }
 }
