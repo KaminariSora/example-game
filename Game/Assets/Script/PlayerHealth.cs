@@ -9,7 +9,10 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     //Detection system
-    public Transform detectionPoint;
+    public Transform detectionPoint1;
+    public Transform detectionPoint2;
+    public Transform detectionPoint3;
+    public Transform detectionPoint4;
     private const float detectionRadius = 0.5f;
     public LayerMask detectionLayer;
     //Damage delay system
@@ -23,19 +26,19 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             TakeDamage(20);
         }
-        if(DetectEnemy() && !isTakingDamage)
+        if ((DetectEnemy(detectionPoint1) || DetectEnemy(detectionPoint2) || DetectEnemy(detectionPoint3) || DetectEnemy(detectionPoint4)) && !isTakingDamage)
         {
             StartCoroutine(TakeDamageWithDelay(10));
         }
     }
 
-    bool DetectEnemy ()
+    bool DetectEnemy(Transform detectionPoint)
     {
-        return Physics2D.OverlapCircle(detectionPoint.position,detectionRadius,detectionLayer);
+        return Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
     }
 
     private IEnumerator TakeDamageWithDelay(int damage)
