@@ -12,22 +12,37 @@ public class Interact : MonoBehaviour
     public LayerMask detectionLayer;
     void Update()
     {
-        if(DetectObject())
+        if (DetectObject())
         {
-            if(InteractionInput())
+            Collider2D detectedCollider = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
+            if (detectedCollider != null)
             {
-                Debug.Log("OpenDoor");
+                if (detectedCollider.CompareTag("Door"))
+                {
+                    if (InteractionInput())
+                    {
+                        Debug.Log("OpenDoor");
+                    }
+                }
+                else if(detectedCollider.CompareTag("Chest"))
+                {
+                    if (InteractionInput())
+                    {
+                        Debug.Log("OpenChest");
+                    }
+                }
             }
+
         }
     }
 
-    bool InteractionInput () 
+    bool InteractionInput()
     {
         return Input.GetKeyDown(KeyCode.F);
     }
 
-    bool DetectObject ()
+    bool DetectObject()
     {
-        return Physics2D.OverlapCircle(detectionPoint.position,detectionRadius,detectionLayer);
+        return Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
     }
 }
