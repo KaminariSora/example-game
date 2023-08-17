@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Interact : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class Interact : MonoBehaviour
     private const float detectionRadius = 0.2f;
     //Detection Layer
     public LayerMask detectionLayer;
+
+    public string sceneName;
     void Update()
     {
         if (DetectObject())
@@ -22,6 +26,7 @@ public class Interact : MonoBehaviour
                     if (InteractionInput())
                     {
                         Debug.Log("OpenDoor");
+                        SceneManager.LoadScene(sceneName);
                     }
                 }
                 else if(detectedCollider.CompareTag("Chest"))

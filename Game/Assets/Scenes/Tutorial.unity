@@ -3557,6 +3557,7 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 128
+  sceneName: Home
 --- !u!114 &704383954
 MonoBehaviour:
   m_ObjectHideFlags: 0
